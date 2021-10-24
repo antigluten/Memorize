@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["🚗", "🚕", "🚅", "🚒", "🚘", "🚙", "🛻", "🛵", "🏍️", "🏎️", "🚜", "🛴", "🛹"]
-    @State var emojiCount = 3
+    /// Task 4: theme choosing buttons
+    var vehicles = ["🚗", "🚕", "🚅", "🚒", "🚘", "🚙", "🛻", "🛵", "🏍️", "🏎️", "🚜", "🛴", "🛹"]
+    var natureEmoji = ["🗾", "🎑", "🏞", "🌅", "🌄", "🌠", "🎇", "🎆", "🌆", "🌃"]
+    var humanEmoji = ["👮🏻‍♀️", "🧑🏻‍💻", "🕵🏻‍♀️", "👨🏻‍🏫", "🕵🏿‍♂️", "👩🏽‍🚀", "👨🏻‍💻", "👨🏻‍✈️"]
+    
+    @State var emojis = ["🚗", "🚕", "🚅", "🚒", "🚘", "🚙", "🛻", "🛵", "🏍️", "🏎️", "🚜", "🛴", "🛹"]
+    
+    @State var emojiCount = 6
     
     var body: some View {
         VStack {
+            /// Task 3: Add title "Memorize" at the top
+            Text("Memorize!")
+                .font(.largeTitle)
+            
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(emojis, id: \.self) { emoji in
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
@@ -23,13 +33,27 @@ struct ContentView: View {
             }
             .foregroundColor(.red)
             Spacer()
+            
+            /// Task 2: remove buttons from the bottom of the screen, solution: just comment
+//            HStack {
+//                remove
+//                Spacer()
+//                add
+//            }
+//            .font(.largeTitle)
+//            .padding(.horizontal)
+            
+            /// Task 4: Add 3 theme choosing buttons
             HStack {
-                remove
                 Spacer()
-                add
+                vehicle
+                Spacer()
+                nature
+                Spacer()
+                human
+                Spacer()
             }
-            .font(.largeTitle)
-            .padding(.horizontal)
+            
         }
         .padding(.horizontal)
     }
@@ -51,6 +75,53 @@ struct ContentView: View {
             }
         } label: {
             Image(systemName: "plus.circle")
+        }
+    }
+    
+    
+    var vehicle: some View {
+        Button {
+            emojis = vehicles
+            /// task 6: shuffle every touch on buttons with shuffle method
+            emojis.shuffle()
+        } label: {
+            /// task 7: add image and text to the button
+            VStack {
+                /// task 8: use sf symbols to represent a theme idea
+                Image(systemName: "car")
+                    .font(.largeTitle)
+                Text("Vehicles")
+                /// task 9: add font size to the text
+                    .font(.caption)
+            }
+        }
+    }
+    
+    var nature: some View {
+        Button {
+            emojis = natureEmoji
+            emojis.shuffle()
+        } label: {
+            VStack {
+                Image(systemName: "tortoise")
+                    .font(.largeTitle)
+                Text("Nature")
+                    .font(.caption)
+            }
+        }
+    }
+    
+    var human: some View {
+        Button {
+            emojis = humanEmoji
+            emojis.shuffle()
+        } label: {
+            VStack {
+                Image(systemName: "person")
+                    .font(.largeTitle)
+                Text("Human")
+                    .font(.caption)
+            }
         }
     }
 }

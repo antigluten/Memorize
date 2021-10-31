@@ -34,14 +34,14 @@ struct ContentView: View {
             .foregroundColor(.red)
             Spacer()
             
-            /// Task 2: remove buttons from the bottom of the screen, solution: just comment
-//            HStack {
-//                remove
-//                Spacer()
-//                add
-//            }
-//            .font(.largeTitle)
-//            .padding(.horizontal)
+            // Task 2: remove buttons from the bottom of the screen, solution: just comment
+            HStack {
+                remove
+                Spacer()
+                add
+            }
+            .font(.largeTitle)
+            .padding(.horizontal)
             
             /// Task 4: Add 3 theme choosing buttons
             HStack {
@@ -81,6 +81,12 @@ struct ContentView: View {
     
     var vehicle: some View {
         Button {
+            // it solves the problem with the different number of symbols
+//            if emojiCount > vehicles.count {
+//                emojiCount = vehicles.count
+//            }
+            // Extra task 1
+            emojiCount = Int.random(in: 4...vehicles.count)
             emojis = vehicles
             /// task 6: shuffle every touch on buttons with shuffle method
             emojis.shuffle()
@@ -99,6 +105,11 @@ struct ContentView: View {
     
     var nature: some View {
         Button {
+            // it solves the problem with the different number of symbols
+//            if emojiCount > natureEmoji.count {
+//                emojiCount = natureEmoji.count
+//            }
+            emojiCount = Int.random(in: 4...natureEmoji.count)
             emojis = natureEmoji
             emojis.shuffle()
         } label: {
@@ -113,6 +124,12 @@ struct ContentView: View {
     
     var human: some View {
         Button {
+            // it solves the problem with the different number of symbols
+//            if emojiCount > humanEmoji.count {
+//                emojiCount = humanEmoji.count
+//            }
+            
+            emojiCount = Int.random(in: 4...humanEmoji.count)
             emojis = humanEmoji
             emojis.shuffle()
         } label: {
